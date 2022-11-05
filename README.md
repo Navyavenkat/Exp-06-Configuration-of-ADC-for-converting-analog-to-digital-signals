@@ -1,8 +1,8 @@
 # Exp-06-Configuration-of-ADC-for-converting-analog-to-digital-signals
 
 
-## Name :	
-## Roll no:
+## Name :	V.NAVYA
+## Roll no:212221230069
 ## Date of experiment : 
   
   
@@ -176,20 +176,52 @@ ADxDRy. E.g. AD0DR1 contains ADC result of channel 1 of ADC0.
 
 Figure -08 Circuit diagram of interfacing an POT with ADC input pin 
 
-## Kiel - Program 
+## Kiel - Program
+
+```
+
+#include <lpc214x.h>
+#include "LCD.h"
+#include "ADC.h"
+unsigned int val;
+/*void delay_ms(unsigned int count)
+{
+	unsigned int i=0,j=0;
+	for(j=0;j<count;j++)
+	{
+		for(i=0;i<count;i++);
+	}
+}*/
+int main()
+{
+	IO1DIR = 0xffffffff;
+	IO0DIR = 0x00000000;
+	PINSEL0 = 0x0300;
+	VPBDIV = 0x02;
+	lcd_init();
+	show(" ADC Value:");
+	while(1)
+	{
+		cmd(0x8b);
+		//delay_ms(1000);
+		val=adc(0,6);
+		dat((val/1000)+48);
+		dat(((val/100)%10)+48);
+		dat(((val/10)%10)+48);
+		dat((val%10)+48);
+	}
+}
+
+
+```
  
 ## Tabulations and graph 
-SL NO	% OF POT VALUE	ADC VALUE
-1		
-2		
-3		
-4		
-5		
-6		
-7		
-8		
-9		
-10		
+
+
+![image](https://user-images.githubusercontent.com/94165327/200128948-10769b60-7af9-4e8d-b1c3-c829e3c32a01.png)
+
+
+
 
  ![image](https://user-images.githubusercontent.com/36288975/198947184-dbccf4b1-10a1-4090-a670-93526ed6e597.png)
 
@@ -205,6 +237,10 @@ Configuring an ADC and the input values are displayed on LCD screen
 Output screen shots :
 
 
+![image](https://user-images.githubusercontent.com/94165327/200128798-e7d4f8e3-9c57-49d0-bd28-131796020949.png)
+
+
+![image](https://user-images.githubusercontent.com/94165327/200128814-f2567e38-f768-4432-846c-155ed4a17760.png)
 
 
 
